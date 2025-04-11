@@ -1,0 +1,23 @@
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #6bbf3d;
+  width: 250px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

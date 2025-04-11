@@ -1,0 +1,23 @@
+.inicio-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .titulo-inicio {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem
+  }
+  
+  .inicio-imagen {
+    /*width: 400px;*/
+    max-width: 65%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
