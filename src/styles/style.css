@@ -1,0 +1,119 @@
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #2c3e50;
+    background-color: #ffffff;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    font-weight: 500;
+    color: #2c3e50;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #6bbf3d;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+  }
+  
+  /* Estilos para botones */
+  .btn-primary {
+    background-color: #6bbf3d;
+    border-color: #6bbf3d;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5aa62d;
+    border-color: #5aa62d;
+  }
+  
+  .btn-outline-primary {
+    color: #6bbf3d;
+    border-color: #6bbf3d;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #6bbf3d;
+    color: white;
+  }
+  
+  /* Estilos para tablas */
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(107, 191, 61, 0.1);
+  }
+  
+  .table-bordered {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-bordered thead th,
+  .table-bordered thead td {
+    border-bottom-width: 2px;
+  }
+
+  /* Estilos para el buscador */
+.input-group-text {
+    background-color: #6bbf3d;
+    color: white;
+    border-color: #6bbf3d;
+  }
+  
+  /* Paginación */
+  .pagination .page-item.active .page-link {
+    background-color: #6bbf3d;
+    border-color: #6bbf3d;
+  }
+  
+  .pagination .page-link {
+    color: #6bbf3d;
+  }
+  
+  .pagination .page-link:hover {
+    color: #5aa62d;
+  }
+  
+  /* Mensaje de no resultados */
+  .no-results {
+    color: #6c757d;
+    font-style: italic;
+  }
