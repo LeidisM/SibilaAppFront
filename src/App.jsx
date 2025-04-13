@@ -1,10 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Inicio from './components/Inicio';
-import Libros from './components/Libros';
-import Usuarios from './components/Usuarios';
-import Prestamos from './components/Prestamos';
-import Devoluciones from './components/Devoluciones';
+import Libros from './components/libros/Libros';
+import Usuarios from './components/usuarios/Usuarios';
+import Prestamos from './components/prestamos/Prestamos';
+import Devoluciones from './components/devoluciones/Devoluciones';
+import CrearUsuario from './components/usuarios/CrearUsuario';
+import EditarUsuario from './components/usuarios/EditarUsuario';
+import DetalleUsuario from './components/usuarios/DetalleUsuario';
+//import CrearLibro from './components/libros/CrearLibro';
+//import CrearPrestamo from './components/prestamos/CrearPrestamo';
+
 // importa aquí otros componentes que uses
 
 function App() {
@@ -13,9 +19,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Inicio />} />  {/* <- Esto es crucial */}
-          <Route path="libros" element={<Libros />} />
+          <Route path="libros" element={<Libros />} />       
           <Route path="usuarios" element={<Usuarios />} />
-          <Route path="prestamos" element={<Prestamos />} />
+          <Route path="usuarios/crear" element={<CrearUsuario />} />
+          <Route path="/usuarios/editar/:id" element={<EditarUsuario />} />
+          <Route path="usuarios/detalle/:id" element={<DetalleUsuario />} />    
+          <Route path="prestamos" element={<Prestamos />} />          
           <Route path="devoluciones" element={<Devoluciones />} />
           {/* otras rutas */}
         </Route>

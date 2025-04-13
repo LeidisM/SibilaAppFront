@@ -1,13 +1,20 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Usuarios = () => {
+  const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState(10); // Control para los elementos por página
+  const tipoDocumentoTexto = {
+    1: 'Cédula de Ciudadanía',
+    2: 'Tarjeta de Identidad',
+    3: 'Cédula de Extranjería'
+  };
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
@@ -19,14 +26,15 @@ const Usuarios = () => {
       .catch(error => {
         console.error("Error al obtener los usuarios:", error);
         setLoading(false);
+        alert("Ocurrió un error al cargar los usuarios.");
       });
   }, []);
 
   const filteredUsuarios = useMemo(() => {
     if (!searchTerm) return usuarios;
-    
+
     const lowercasedSearch = searchTerm.toLowerCase();
-    return usuarios.filter(usuario => 
+    return usuarios.filter(usuario =>
       Object.values(usuario).some(
         value => value && value.toString().toLowerCase().includes(lowercasedSearch)
       )
@@ -41,6 +49,34 @@ const Usuarios = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleItemsPerPageChange = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(1); // Reset to first page when changing items per page
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/usuarios/editar/${id}`);
+  };
+
+  const handleView = (id) => {
+    navigate(`/usuarios/detalle/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    // Lógica para eliminar usuario, ejemplo de confirmación:
+    if (window.confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
+      axios.delete(`http://localhost:5242/api/Usuarios/${id}`)
+        .then(response => {
+          setUsuarios(usuarios.filter(usuario => usuario.id !== id)); // Actualiza el estado
+          alert("Usuario eliminado correctamente.");
+        })
+        .catch(error => {
+          console.error("Error al eliminar el usuario:", error);
+          alert("Ocurrió un error al eliminar el usuario.");
+        });
+    }
   };
 
   if (loading) {
@@ -60,7 +96,7 @@ const Usuarios = () => {
           <i className="fas fa-users me-2"></i>
           Lista de Usuarios
         </h2>
-        <button className="btn btn-primary">
+        <button className="btn btn-primary" onClick={() => navigate('/usuarios/crear')}>
           <i className="fas fa-plus me-2"></i>
           Nuevo Usuario
         </button>
@@ -79,7 +115,7 @@ const Usuarios = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setCurrentPage(1);
+              setCurrentPage(1); // Reset a la primera página al cambiar búsqueda
             }}
           />
           {searchTerm && (
@@ -95,6 +131,15 @@ const Usuarios = () => {
         <small className="text-muted">
           Mostrando {paginatedUsuarios.length} de {filteredUsuarios.length} usuarios encontrados
         </small>
+      </div>
+
+      {/* Selector de elementos por página */}
+      <div className="mb-3">
+        <select className="form-select" onChange={handleItemsPerPageChange} value={itemsPerPage}>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
       </div>
 
       {/* Tabla de usuarios */}
@@ -117,18 +162,18 @@ const Usuarios = () => {
                 <tr key={usuario.id}>
                   <td>{usuario.nombre}</td>
                   <td>{usuario.apellido}</td>
-                  <td>{usuario.rol}</td>
-                  <td>{usuario.tipoDocumento}</td>
+                  <td>{usuario.rol?.nombre || 'Sin rol'}</td>
+                  <td>{tipoDocumentoTexto[usuario.tipoDocumento]}</td>
                   <td>{usuario.documento}</td>
                   <td>{usuario.correoElectronico}</td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary me-2">
+                    <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(usuario.id)} aria-label="Editar usuario">
                       <i className="fas fa-edit"></i>
                     </button>
-                    <button className="btn btn-sm btn-outline-secondary me-2">
+                    <button className="btn btn-sm btn-outline-secondary me-2" onClick={() => handleView(usuario.id)} aria-label="Ver detalles usuario">
                       <i className="fas fa-eye"></i>
                     </button>
-                    <button className="btn btn-sm btn-outline-danger">
+                    <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(usuario.id)} aria-label="Eliminar usuario">
                       <i className="fas fa-trash"></i>
                     </button>
                   </td>
