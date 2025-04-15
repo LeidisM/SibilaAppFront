@@ -4,10 +4,13 @@ import Inicio from './components/Inicio';
 import Libros from './components/libros/Libros';
 import Usuarios from './components/usuarios/Usuarios';
 import Prestamos from './components/prestamos/Prestamos';
+import DetallePrestamo from './components/prestamos/DetallePrestamo';
 import Devoluciones from './components/devoluciones/Devoluciones';
 import CrearUsuario from './components/usuarios/CrearUsuario';
 import EditarUsuario from './components/usuarios/EditarUsuario';
 import DetalleUsuario from './components/usuarios/DetalleUsuario';
+import EditarLibro from './components/libros/EditarLibro';
+import DetalleLibro from './components/libros/DetalleLibro';
 //import CrearLibro from './components/libros/CrearLibro';
 //import CrearPrestamo from './components/prestamos/CrearPrestamo';
 
@@ -19,11 +22,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Inicio />} />  {/* <- Esto es crucial */}
-          <Route path="libros" element={<Libros />} />       
+          <Route path="libros" element={<Libros />} />
+          <Route path="/libros/editar/:id" element={<EditarLibro />} />
+          <Route path="/libros/detalle/:id" element={<DetalleLibro />} />       
           <Route path="usuarios" element={<Usuarios />} />
           <Route path="usuarios/crear" element={<CrearUsuario />} />
           <Route path="/usuarios/editar/:id" element={<EditarUsuario />} />
           <Route path="usuarios/detalle/:id" element={<DetalleUsuario />} />    
+          <Route path="prestamos/detalle/:id" element={<DetallePrestamo />} />
           <Route path="prestamos" element={<Prestamos />} />          
           <Route path="devoluciones" element={<Devoluciones />} />
           {/* otras rutas */}
