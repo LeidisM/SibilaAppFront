@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Prestamos = () => {
+  const navigate = useNavigate();
   const [prestamos, setPrestamos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,6 +42,29 @@ const Prestamos = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/prestamos/editar/${id}`);
+  };
+
+  const handleView = (id) => {
+    navigate(`/prestamos/detalle/${id}`);
+  };
+
+  const handleDevolver = (id) => {
+    // Lógica para eliminar usuario, ejemplo de confirmación:
+    if (window.confirm("¿Estás seguro deseas devolver este libro?")) {
+      axios.Post(`http://localhost:5242/api/Prestamos/Devolver/${id}`)
+        .then(response => {
+          setPresamo(pretamos.filter(prestamo => prestamo.id !== id)); // Actualiza el estado
+          alert("Usuario eliminado correctamente.");
+        })
+        .catch(error => {
+          console.error("Error al eliminar el usuario:", error);
+          alert("Ocurrió un error al eliminar el usuario.");
+        });
+    }
   };
 
   if (loading) {
@@ -127,7 +152,7 @@ const Prestamos = () => {
                     <button className="btn btn-sm btn-outline-primary me-2">
                       <i className="fas fa-edit"></i>
                     </button>
-                    <button className="btn btn-sm btn-outline-secondary">
+                    <button className="btn btn-sm btn-outline-secondary me-2" onClick={() => handleView(prestamo.id)} aria-label="Ver detalles prestamo">
                       <i className="fas fa-eye"></i>
                     </button>
                   </td>
