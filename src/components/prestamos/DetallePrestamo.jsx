@@ -20,7 +20,7 @@ const DetallePrestamo = () => {
   useEffect(() => {
     const fetchPrestamo = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Prestamos/${id}`);
+        const response = await axios.get(`http://localhost:5242/api/Prestamos/GetPrestamo/${id}`);
         setPrestamo(response.data);
       } catch (error) {
         console.error("Error al obtener el Prestamo:", error);
