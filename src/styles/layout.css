@@ -59,3 +59,67 @@
     margin: 0 auto;
     padding: 20px;
   }
+
+  /* Estilos mejorados para el botón de logout */
+.logout-container {
+  margin-top: auto; /* Empuja el botón hacia la parte inferior */
+  padding: 20px 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Versión alternativa con color de acento */
+.logout-btn.accent {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.logout-btn.accent:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+/* Estilos para el ícono */
+.logout-btn i {
+  font-size: 0.9em;
+  transition: transform 0.2s ease;
+}
+
+.logout-btn:hover i {
+  transform: translateX(-2px);
+}
+
+/* Estilos para la información del usuario (mejorados) */
+.user-info {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin: 10px 0 15px;
+  padding: 0 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}

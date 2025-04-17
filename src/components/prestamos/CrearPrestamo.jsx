@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, Alert } from 'react-bootstrap';
 import '../../styles/formStyles.css';
+import api from '../../ApiConnection/Api';
 
 const CrearPrestamo = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const CrearPrestamo = () => {
     setIsSubmitting(true);
 
     try {
-      await axios.post('http://localhost:5242/api/Prestamos/CrearPrestamo', prestamo);
+      await api.post('http://localhost:5242/api/Prestamos/CrearPrestamo', prestamo);
       setShowSuccess(true);
       setPrestamo({
         documentoUsuario: '',

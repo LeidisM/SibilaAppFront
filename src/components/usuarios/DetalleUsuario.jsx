@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Card, Alert, Spinner } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const DetalleUsuario = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const DetalleUsuario = () => {
   useEffect(() => {
     const fetchUsuario = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Usuarios/${id}`);
+        const response = await api.get(`/Usuarios/${id}`);
         setUsuario(response.data);
       } catch (error) {
         console.error("Error al obtener el usuario:", error);

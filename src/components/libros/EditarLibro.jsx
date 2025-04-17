@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const EditarLibro = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const EditarLibro = () => {
   useEffect(() => {
     const fetchLibro = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Libros/${id}`);
+        const response = await api.get(`/Libros/${id}`);
         setLibro(response.data);
       } catch (error) {
         console.error("Error al obtener el libro:", error);
@@ -50,7 +51,7 @@ const EditarLibro = () => {
     setIsSubmitting(true);
 
     try {
-      await axios.put(`http://localhost:5242/api/Libros/${id}`, libro);
+      await api.put(`/Libros/${id}`, libro);
       setShowSuccess(true);
       setTimeout(() => {
         navigate('/libros');

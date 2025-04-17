@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Alert } from 'react-bootstrap';
 import '../../styles/formStyles.css';
+import api from '../../ApiConnection/Api';
 
 const EditarPrestamo = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const EditarPrestamo = () => {
   useEffect(() => {
     const fetchLibro = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Prestamos/GetPrestamo/${id}`);
+        const response = await api.get(`/Prestamos/GetPrestamo/${id}`);
         setPrestamo({
           id: response.data.id,
           documentoUsuario: response.data.usuario.documento,
@@ -52,7 +53,7 @@ const EditarPrestamo = () => {
     setIsSubmitting(true);
 
     try {
-      await axios.post('http://localhost:5242/api/Prestamos/EditarPrestamo', prestamo);
+      await api.post('/Prestamos/EditarPrestamo', prestamo);
       setShowSuccess(true);
       setPrestamo({
         documentoUsuario: '',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const Devoluciones = () => {
   const [devoluciones, setDevoluciones] = useState([]);
@@ -11,7 +12,7 @@ const Devoluciones = () => {
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
-    axios.get("http://localhost:5242/api/Prestamos/GetDevoluciones")
+    api.get("/Prestamos/GetDevoluciones")
       .then(response => {
         setDevoluciones(response.data);
         setLoading(false);
