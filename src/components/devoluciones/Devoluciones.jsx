@@ -11,7 +11,7 @@ const Devoluciones = () => {
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
-    axios.get("http://localhost:5242/api/Devoluciones")
+    axios.get("http://localhost:5242/api/Prestamos/GetDevoluciones")
       .then(response => {
         setDevoluciones(response.data);
         setLoading(false);

@@ -13,7 +13,7 @@ const Prestamos = () => {
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
-    axios.get("http://localhost:5242/api/Prestamos")
+    axios.get("http://localhost:5242/api/Prestamos/GetPrestamos")
       .then(response => {
         setPrestamos(response.data);
         setLoading(false);
@@ -53,16 +53,16 @@ const Prestamos = () => {
   };
 
   const handleDevolver = (id) => {
-    // Lógica para eliminar usuario, ejemplo de confirmación:
-    if (window.confirm("¿Estás seguro deseas devolver este libro?")) {
-      axios.Post(`http://localhost:5242/api/Prestamos/Devolver/${id}`)
-        .then(response => {
-          setPresamo(pretamos.filter(prestamo => prestamo.id !== id)); // Actualiza el estado
-          alert("Usuario eliminado correctamente.");
+    // Lógica para eliminar prestamo, ejemplo de confirmación:
+    if (window.confirm("El prestamo se cerrará")) {
+      axios.post(`http://localhost:5242/api/Prestamos/Devolver/${id}`)
+        .then(() => {
+          setPrestamos(prestamos.filter(prestamo => prestamo.id !== id)); // Actualiza el estado
+          alert("Prestamo cerrado correctamente.");
         })
         .catch(error => {
-          console.error("Error al eliminar el usuario:", error);
-          alert("Ocurrió un error al eliminar el usuario.");
+          console.error("Error al devolver el prestamo:", error);
+          alert("Ocurrió un error al devolver el prestamo.");
         });
     }
   };
@@ -84,7 +84,7 @@ const Prestamos = () => {
           <i className="fas fa-exchange-alt me-2"></i>
           Lista de Préstamos
         </h2>
-        <button className="btn btn-primary">
+        <button className="btn btn-primary" onClick={() => navigate('/prestamos/crear')}>
           <i className="fas fa-plus me-2"></i>
           Nuevo Préstamo
         </button>
@@ -146,10 +146,10 @@ const Prestamos = () => {
                   <td>{new Date(prestamo.fechaPrestamo).toLocaleDateString()}</td>
                   <td>{prestamo.fechaDevolucion ? new Date(prestamo.fechaDevolucion).toLocaleDateString() : 'Pendiente'}</td>
                   <td className="d-flex gap-2">
-                    <button className="btn btn-sm btn-warning">
+                    <button className="btn btn-sm btn-warning" onClick={() => handleDevolver(prestamo.id)}>
                       <i className="fas fa-undo me-1"></i> Devolver
                     </button>
-                    <button className="btn btn-sm btn-outline-primary me-2">
+                    <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(prestamo.id)} aria-label="Editar prestamo">
                       <i className="fas fa-edit"></i>
                     </button>
                     <button className="btn btn-sm btn-outline-secondary me-2" onClick={() => handleView(prestamo.id)} aria-label="Ver detalles prestamo">
