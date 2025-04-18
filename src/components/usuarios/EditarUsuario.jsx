@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import api from '../../ApiConnection/Api';
 
 const EditarUsuario = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const EditarUsuario = () => {
 
   useEffect(() => {
     // Cargar datos del usuario
-    axios.get(`http://localhost:5242/api/Usuarios/${id}`)
+    api.get(`/Usuarios/${id}`)
       .then(response => {
         setUsuario(response.data);
         setLoading(false);
@@ -24,7 +25,7 @@ const EditarUsuario = () => {
       });
 
     // Cargar los roles disponibles
-    axios.get("http://localhost:5242/api/Roles")
+    api.get("/Roles")
       .then(response => {
         setRoles(response.data);
       })
@@ -42,7 +43,7 @@ const EditarUsuario = () => {
       return;
     }
 
-    axios.put(`http://localhost:5242/api/Usuarios/${id}`, usuario)
+    api.put(`/Usuarios/${id}`, usuario)
       .then(response => {
         alert("Usuario actualizado correctamente.");
         navigate('/usuarios');

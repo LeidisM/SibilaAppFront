@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Card, Alert, Spinner } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const DetalleLibro = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const DetalleLibro = () => {
   useEffect(() => {
     const fetchLibro = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Libros/${id}`);
+        const response = await api.get(`/Libros/${id}`);
         setLibro(response.data);
       } catch (error) {
         console.error("Error al obtener el Libro:", error);

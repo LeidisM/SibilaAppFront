@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const CrearLibro = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const CrearLibro = () => {
     setIsSubmitting(true);
 
     try {
-      await axios.post(`http://localhost:5242/api/Libros`, libro);
+      await api.post(`/Libros`, libro);
       setShowSuccess(true);
       setTimeout(() => {
         navigate('/libros');

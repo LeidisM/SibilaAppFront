@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Card, Alert, Spinner } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const DetallePrestamo = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const DetallePrestamo = () => {
   useEffect(() => {
     const fetchPrestamo = async () => {
       try {
-        const response = await axios.get(`http://localhost:5242/api/Prestamos/GetPrestamo/${id}`);
+        const response = await api.get(`/Prestamos/GetPrestamo/${id}`);
         setPrestamo(response.data);
       } catch (error) {
         console.error("Error al obtener el Prestamo:", error);

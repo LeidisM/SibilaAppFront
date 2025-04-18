@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import api from '../../ApiConnection/Api';
 
 const Prestamos = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Prestamos = () => {
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
-    axios.get("http://localhost:5242/api/Prestamos/GetPrestamos")
+    api.get("/Prestamos/GetPrestamos")
       .then(response => {
         setPrestamos(response.data);
         setLoading(false);
@@ -55,7 +56,7 @@ const Prestamos = () => {
   const handleDevolver = (id) => {
     // Lógica para eliminar prestamo, ejemplo de confirmación:
     if (window.confirm("El prestamo se cerrará")) {
-      axios.post(`http://localhost:5242/api/Prestamos/Devolver/${id}`)
+      api.post(`/Prestamos/Devolver/${id}`)
         .then(() => {
           setPrestamos(prestamos.filter(prestamo => prestamo.id !== id)); // Actualiza el estado
           alert("Prestamo cerrado correctamente.");

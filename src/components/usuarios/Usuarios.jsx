@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import api from '../../ApiConnection/Api';
 
 const Usuarios = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Usuarios = () => {
 
   useEffect(() => {
     // REEMPLAZAR CON EL ENDPOINT CORRECTO
-    axios.get("http://localhost:5242/api/Usuarios")
+    api.get("/Usuarios")
       .then(response => {
         setUsuarios(response.data);
         setLoading(false);
@@ -67,7 +68,7 @@ const Usuarios = () => {
   const handleDelete = (id) => {
     // Lógica para eliminar usuario, ejemplo de confirmación:
     if (window.confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
-      axios.delete(`http://localhost:5242/api/Usuarios/${id}`)
+      api.delete(`/Usuarios/${id}`)
         .then(response => {
           setUsuarios(usuarios.filter(usuario => usuario.id !== id)); // Actualiza el estado
           alert("Usuario eliminado correctamente.");

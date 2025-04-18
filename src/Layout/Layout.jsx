@@ -1,37 +1,16 @@
-/*import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-//import './Layout.css';
-import '../styles/layout.css'; 
-
-const Layout = () => {
-  return (
-    <div className="layout-wrapper">
-      <nav className="sidebar">
-        <h2>Menú</h2>
-        <Link to="/">Inicio</Link>
-        <Link to="/usuarios">Usuarios</Link>
-        <Link to="/libros">Libros</Link>
-        <Link to="/prestamos">Préstamos</Link>
-        <Link to="/devoluciones">Devoluciones</Link>
-      </nav>
-
-      <main className="main-content">
-        <Outlet />
-      </main>
-    </div>
-  );
-};
-
-
-export default Layout;
-*/
-
 import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate  } from 'react-router-dom';
+import { useAuth } from '../components/Autenticacion/AuthContext';
 import '../styles/layout.css'; 
 
 const Layout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout(navigate); // Pasa navigate como argumento según la solución anterior
+  };
 
   return (
     <div className="layout-wrapper">
@@ -71,6 +50,20 @@ const Layout = () => {
             <i className="fas fa-undo"></i> Devoluciones
           </Link>
         </nav>
+        
+        {/* Botón de Logout en la parte inferior */}
+        {user && (
+          <div className="logout-container">
+            <button 
+              onClick={handleLogout}
+              className="logout-btn"
+            >
+              <i className="fas fa-sign-out-alt"></i>
+              Cerrar Sesión
+            </button>
+          </div>
+        )}
+
       </aside>
 
       <main className="main-content">

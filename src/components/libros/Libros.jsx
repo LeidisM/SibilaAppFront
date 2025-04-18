@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { Pagination } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import api from '../../ApiConnection/Api';
 
 const Libros = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Libros = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5242/api/Libros")
+    api.get("/Libros")
       .then(response => {
         setLibros(response.data);
         setLoading(false);
@@ -68,7 +69,7 @@ const Libros = () => {
 
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar este libro?")) {
-      axios.delete(`http://localhost:5242/api/Libros/${id}`)
+      api.delete(`/Libros/${id}`)
         .then(response => {
           setLibros(libros.filter(libro => libro.id !== id));
           alert("Libro eliminado correctamente.");
