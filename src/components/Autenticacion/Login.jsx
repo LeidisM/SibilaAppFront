@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './AuthContext'; 
 import { Button, Form, Alert } from 'react-bootstrap';
+import api from '../../ApiConnection/Api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ const Login = () => {
     setLoading(true);
   
     try {
-      const response = await axios.post('http://localhost:5242/api/Autenticacion/login', {
+      const response = await api.post('/Autenticacion/login', {
         Email: email,
         Password: password
       });

@@ -32,7 +32,7 @@ const CrearPrestamo = () => {
     setIsSubmitting(true);
 
     try {
-      await api.post('http://localhost:5242/api/Prestamos/CrearPrestamo', prestamo);
+      await api.post('/Prestamos/CrearPrestamo', prestamo);
       setShowSuccess(true);
       setPrestamo({
         documentoUsuario: '',

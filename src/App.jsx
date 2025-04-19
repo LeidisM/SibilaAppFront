@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/Autenticacion/AuthContext';
 import PrivateRoute from './components/Autenticacion/PrivateRoute';
-import Layout from './layout/Layout';
+import Layout from './Layout/Layout';
 import Inicio from './components/Inicio';
 import Login from './components/Autenticacion/Login';
 import Libros from './components/libros/Libros';
