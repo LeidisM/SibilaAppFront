@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5242/api',
+  baseURL: 'https://sibila-api.onrender.com/api', //Descomentar para publicar en render
+  //baseURL: 'http://localhost:5242/api', //Descomentar para local
 });
 
 // Interceptor para añadir el token a cada solicitud
